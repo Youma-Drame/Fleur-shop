@@ -1,0 +1,99 @@
+body {
+    margin: 0;
+    font-family: 'Open Sans', sans-serif;
+    background-color: #fbe9eb;
+    color: #333;
+}
+
+header {
+    background-color: #e8aeb7;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 1em 2em;
+}
+
+.logo {
+    font-family: 'Great Vibes', cursive;
+    font-size: 2em;
+    color: #4b2e2e;
+}
+
+nav ul {
+    list-style: none;
+    display: flex;
+    gap: 1.5em;
+}
+
+nav a {
+    text-decoration: none;
+    color: #4b2e2e;
+    font-weight: bold;
+}
+
+.hero {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 4em 2em;
+    background-color: #fff;
+    margin: 2em;
+    border: 2px solid #e0c0c0;
+    border-radius: 10px;
+    text-align: center;
+    gap:2em;
+    flex-wrap: wrap;
+}
+.fleur-img{
+    max-width: 200px;
+    height: auto;
+}
+
+.slogan {
+    font-family: 'Great Vibes', cursive;
+    font-size: 2em;
+    margin-bottom: 0.5em;
+}
+
+.description {
+    font-family: 'Great Vibes', cursive;
+    font-size: 1.5em;
+    margin-bottom: 1.5em;
+}
+
+.btn {
+    padding: 0.8em 1.5em;
+    background-color: #e8aeb7;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    text-decoration: none;
+    font-weight: bold;
+    transition: background-color 0.3s;
+}
+
+.btn:hover {
+    background-color: #d18a96;
+}
+@media screen and (max-width: 768px) {
+    .hero {
+        flex-direction: column;
+        text-align: center;
+    }
+
+    .fleur-img {
+        max-width: 150px;
+        margin-bottom: 1em;
+    }
+
+    nav ul {
+        flex-direction: column;
+        align-items: center;
+        gap: 0.8em;
+    }
+
+    header {
+        flex-direction: column;
+        gap: 1em;
+    }
+}
