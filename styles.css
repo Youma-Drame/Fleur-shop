@@ -1,99 +1,102 @@
-body {
+body{
+    font-family: Arial, sans-serif;
+    background-color: #f9f9f9;
     margin: 0;
-    font-family: 'Open Sans', sans-serif;
-    background-color: #fbe9eb;
-    color: #333;
+    padding: 0;
 }
+.container{
+    width: 90%;
+    max-width: 700px;
+    margin: 0 auto;
+    background-color: #fff;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+    padding: 20px;
+}
+header h1{
+    color: #b48c94;
+    text-align: center;
 
-header {
-    background-color: #e8aeb7;
+ 
+}
+.intro-btn{
+    text-align: center;
+    margin-bottom: 30px;
+}
+.btn{
+    background-color: #d9a7b0;
+    color: white;
+    padding: 10px 20px;
+    text-decoration: none;
+    border-radius: 5px;
+    display: inline-block;
+    margin-top: 10px;
+}
+.bouquets h2,
+.why-us h2{
+    color: #444;
+    text-align: center;
+}
+.products {
     display: flex;
     justify-content: space-between;
-    align-items: center;
-    padding: 1em 2em;
-}
-
-.logo {
-    font-family: 'Great Vibes', cursive;
-    font-size: 2em;
-    color: #4b2e2e;
-}
-
-nav ul {
-    list-style: none;
-    display: flex;
-    gap: 1.5em;
-}
-
-nav a {
-    text-decoration: none;
-    color: #4b2e2e;
-    font-weight: bold;
-}
-
-.hero {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    padding: 4em 2em;
-    background-color: #fff;
-    margin: 2em;
-    border: 2px solid #e0c0c0;
-    border-radius: 10px;
-    text-align: center;
-    gap:2em;
+    gap: 15px;
     flex-wrap: wrap;
 }
-.fleur-img{
-    max-width: 200px;
-    height: auto;
+.product{
+    width: 30%;
+    text-align: center;
 }
-
-.slogan {
-    font-family: 'Great Vibes', cursive;
-    font-size: 2em;
-    margin-bottom: 0.5em;
+.product img {
+    width: 100%;
+    border-radius: 8px;
 }
-
-.description {
-    font-family: 'Great Vibes', cursive;
-    font-size: 1.5em;
-    margin-bottom: 1.5em;
+.why-us ul {
+    list-style: none;
+    margin: 10px 0;
+    padding: 0;
+    text-align: center;
 }
-
-.btn {
-    padding: 0.8em 1.5em;
-    background-color: #e8aeb7;
-    color: white;
+.why-us li {
+    margin: 10px 0;
+    font-size: 16px;
+}.newsletter {
+    text-align: center;
+    margin-top: 30px;
+}
+.newsletter input[type="email"] {
+    padding: 10px;
+    width: 60%;
+    max-width: 300px;
+    margin-bottom: 10px;
+}
+.newsletter button {
     border: none;
-    border-radius: 5px;
-    text-decoration: none;
-    font-weight: bold;
-    transition: background-color 0.3s;
+    cursor: pointer;
 }
-
-.btn:hover {
-    background-color: #d18a96;
+footer {
+    margin-top: 30px;
+    font-size: 14px;
+    color: #555;
+    text-align: center;
+}
+footer a {
+    color: #b48c94;
+    text-decoration: none;
+    margin: 0 5px;
 }
 @media screen and (max-width: 768px) {
-    .hero {
-        flex-direction: column;
-        text-align: center;
-    }
-
-    .fleur-img {
-        max-width: 150px;
-        margin-bottom: 1em;
-    }
-
-    nav ul {
+    .products {
         flex-direction: column;
         align-items: center;
-        gap: 0.8em;
     }
-
-    header {
-        flex-direction: column;
-        gap: 1em;
+    .product {
+        width: 90%;
+    }
+    .newsletter input [type="email"]{
+        width: 80%;
+    }
+    .btn {
+        width: auto;
+        text-align: center;
     }
 }
