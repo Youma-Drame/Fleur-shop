@@ -31,7 +31,10 @@ header h1{
     display: inline-block;
     margin-top: 10px;
 }
-.bouquets h2,
+.bouquets h2{
+    color: #444;
+    text-align: center;
+}
 .why-us h2{
     color: #444;
     text-align: center;
@@ -95,8 +98,8 @@ footer a {
     .newsletter input [type="email"]{
         width: 80%;
     }
-    .btn {
-        width: auto;
-        text-align: center;
+    .newsletter button {
+        width: 80%;
+        padding: 10px;
     }
 }

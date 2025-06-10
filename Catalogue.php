@@ -4,12 +4,36 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
      <link rel="stylesheet" href="styles.css">
+     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.6/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-4Q6Gf2aSP4eDXB8Miphtr37CMZZQ5oXLH2yaXMJ2w8e2ZtHTl7GptT4jmndRuHDT" crossorigin="anonymous">
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.6/dist/js/bootstrap.bundle.min.js" integrity="sha384-j1CDi7MgGQ12Z7Qab0qlWQ/Qqz24Gc6BM0thvEMVjHnfYGF0rmFCozFSxQBxwHKO" crossorigin="anonymous"></script>
     <title>Tous nos bouquets</title>
 </head>
 <body>
      <?php
  include 'header.php';
  ?>
+ <div class="">
+
+    <div id="carouselExampleCaptions" class="carousel slide">
+  <div class="carousel-indicators">
+    <button type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide-to="2" aria-label="Slide 3"></button>
+  </div>
+  <nav class="navbar navbar-expand-lg bg-body-tertiary">
+    <div class="container-fluid">
+      
+      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="navbarSupportedContent">
+        
+        <form class="d-flex" role="search">
+          <a class="btn btn-outline-success" href="index.php">Login <i class="fa-solid fa-user"></i></a>
+
+          <a href="register.php" class="btn ms-3 btn-outline-success" >Register</a>
+        </form>
+      </div>
+    </div>
+  </nav>
  <header>
     <h1>Tous nos bouquets</h1>
     <p>Découvrez notre sélection de fleurs et de bouquets, parfaits pour chaque occasions.</p>
@@ -186,7 +210,46 @@
                                                 <p>Brassée de lys</p>
                                                 <strong>33,95€</strong>
                                                 </div>
+                                                <div class="product">
+                                                  <img src="https://medias.interflora.fr/fstrz/r/s/c/medias.interflora.fr/medias/2DH-THUMBMAY-PRIMARY-0-1.jpg?context=bWFzdGVyfGltYWdlc3wxMTg5NzJ8aW1hZ2UvanBlZ3xpbWFnZXMvaDZhL2g1Zi85NzIxNjM2MTI2NzUwLmpwZ3w5YTcyNTdhOWNmYTYwZWMwYTkxNzllNzcwYTk5YmJmM2NmNWU5ZjBmM2UxYWFkY2E0ZjAxZTY1NzY5MWI3NjBi&frz-width=320" alt="">
+                                                  <p>Douceur printanière.</p>
+                                                  <strong>31,95€</strong>
+                                                  </div>
 </div>
 
 </section>
+</div>
+<div class="mt-5">
+        <h2>Contactez-nous</h2>
+        <p>Pour toute question ou demande spéciale, n'hésitez pas à nous contacter.</p>
+        <form>
+            <div class="mb-3">
+                <label for="name" class="form-label">Nom</label>
+                <input type="text" class="form-control" id="name" required>
+            </div>
+            <div class="mb-3">
+                <label for="email" class="form-label">Email</label>
+                <input type="email" class="form-control" id="email" required>
+            </div>
+            <div class="mb-3">
+                <label for="message" class="form-label">Message</label>
+                <textarea class="form-control" id="message" rows="3" required></textarea>
+            </div>
+            <button type="submit" class="btn btn-primary">Envoyer</button>
+        </form>
+    </div>
+</div>
+</div>
+</div>
+<div class="footer mt-5">
+    <p>&copy; 2023 Fleur'shop. Tous droits réservés.</p>
+</div>
+</div>
+</div>
+</div>
+<footer class="footer">
+    <div class="container">
+        <p>&copy; 2025 Tous droits réservés.</p>
+        <p>Contact:
+            <a href="mailto:
 
