@@ -1,5 +1,17 @@
+<?php
+
+include 'config.php'; // Assurez-vous que ce fichier contient la connexion à la base de données
+
+
+
+//take produit from database
+$listPorduits = $pdo->query("SELECT * FROM produit")->fetchAll(PDO::FETCH_ASSOC);
+
+?>
+
+
 <!DOCTYPE html>
-<html lang="fr">
+<html lang="En">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -12,36 +24,36 @@
 <body>
  <?php
  include 'header.php';
- ?> 
-  <div class="">
+ ?>
+<?php session_start();  
+ require 'config.php'; // Assurez-vous que ce fichier contient la connexion à la base de données
+ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+     $email = $_POST['email'];
+     $password = $_POST['password'];
 
-    <div id="carouselExampleCaptions" class="carousel slide">
-  <div class="carousel-indicators">
-    <button type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide-to="2" aria-label="Slide 3"></button>
-  </div>
-  <nav class="navbar navbar-expand-lg bg-body-tertiary">
-    <div class="container-fluid">
-      
-      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-        <span class="navbar-toggler-icon"></span>
-      </button>
-      <div class="collapse navbar-collapse" id="navbarSupportedContent">
-        
-        <form class="d-flex" role="search">
-          <a class="btn btn-outline-success" href="index.php">Login <i class="fa-solid fa-user"></i></a>
+     // Requête pour vérifier les identifiants
+     $stmt = $pdo->prepare("SELECT * FROM users WHERE email = :email AND password = :password");
+     $stmt->execute(['email' => $email, 'password' => $password]);
+     $user = $stmt->fetch();
 
-          <a href="register.php" class="btn ms-3 btn-outline-success" >Register</a>
-        </form>
-      </div>
-    </div>
-  </nav>
+     if ($user) {
+         // Authentification réussie
+         $_SESSION['user_id'] = $user['id'];
+         header('Location: index.php'); // Rediriger vers la page d'accueil
+         exit();
+     } else {
+         // Authentification échouée
+         echo "<div class='alert alert-danger'>Identifiants incorrects.</div>";
+     }
+  }
+  ?>
   <div class="carousel-inner">
     <div class="carousel-item active">
 
       <img src="https://m.media-amazon.com/images/S/aplus-media-library-service-media/6da6769e-6fe0-406f-b5d7-bfc1de8b4f69.__CR0,0,1200,1200_PT0_SX300_V1___.jpg" class="d-block w-100" alt="">
       <div class="carousel-caption d-none d-md-block">
-      <h1>Fleur'shop</h1>
-      <p>Votre boutique de fleurs en ligne</p>
+      <h1 class= 'text-center'>Fleur'shop</h1>
+      <h4 class='text-center'>Votre boutique de fleurs en ligne</h4>
       <h1>Offrez une émotion, une fleur,un souvenir</h1>
       <p class="intro-btn"><a href="catalogue.php" class="btn">Découvrir notre collection</a></p>
       </div>
@@ -57,68 +69,71 @@
   </button>
 </div>
 <section class="bouquets">
-  <h1>Nos bouquets du moment</h1>
+  <h1 class='text-center'>Nos bouquets du moment</h1>
   <p>Découvrez notre sélection de bouquets de fleurs, conçus avec soin pour chaque occasion. Que ce soit pour un anniversaire, un mariage ou simplement pour faire plaisir, nous avons le bouquet parfait pour vous.</p>
+  <?php foreach ($listPorduits as $produit) : ?>
+<div class="product">
+  <img src="<?= $produit['image'] ?>" alt="bouquet de roses">
+  <p><?= $produit['description'] ?></p>
+  <strong><?= $produit['prix'] ?>€</strong>
+ <p><a href="Panier.php?id=<?= $produit['id'] ?>" class="btn">Ajouter au panier</a></p>
+</div>
+<?php endforeach; ?>
   <div class="products">
     <div class ="product">
     <img src="https://medias.interflora.fr/fstrz/r/s/c/medias.interflora.fr/medias/6DC-GALLERY-0-1.jpg?context=bWFzdGVyfGltYWdlc3w0NzIzODV8aW1hZ2UvanBlZ3xpbWFnZXMvaDBiL2gxOC85NjA3MDA0MDI4OTU4LmpwZ3w5MzExOGI0MzU4M2U0NDUxZTU1M2YwZjJkOGU3YTE3NTI3MzVhODBiMWQ4M2EwNGE2Yzk1ZmQ3ZTgyZWM0NTJi&frz-width=542" alt="Bouquet de saison">
     <p>les grands classiques des bouquets romantiques que sont les roses et les lys.</p>
     <strong>79,95€</strong>
- <p><a href="Panier.php" class="btn">Ajouter au panier</a></p>
+ <p><a href="Panier.php?id=<?= $produit['id'] ?>" class="btn">Ajouter au panier</a></p>
 </div>
-<div class="product">
-  <img src="https://medias.florajet.com/_w_/produits/600/50292.jpg" alt="bouquet de roses">
-  <p>Troublant et opulent bouquet de roses écarlates à chaque fleur parle d'amour et d'éternité.</p>
-  <strong>52,90€</strong>
- <p><a href="Panier.php" class="btn">Ajouter au panier</a></p>
-</div>
+
 <div class="product">
   <img src="https://www.la-vie-en-fleur.fr/wp-content/uploads/2023/01/coussin-deuil.jpg" alt="Coussin deuil">
   <p>Coussin deuil avec fleurs de saison.</p>
   <strong>77.00€</strong>
- <p><a href="Panier.php" class="btn">Ajouter au panier</a></p>
+<p><a href="Panier.php?id=<?= $produit['id'] ?>" class="btn">Ajouter au panier</a></p>
 </div>
 <div class="product">
   <img src="https://medias.interflora.fr/fstrz/r/s/c/medias.interflora.fr/medias/W2BOROMO-GALLERY-0-1.jpg?context=bWFzdGVyfGltYWdlc3w1MzU3NjB8aW1hZ2UvanBlZ3xpbWFnZXMvaGM2L2hhNy85NjEzMzYxMjgzMTAyLmpwZ3xkOTYxNTdkNjcyYjA1ZmU5OWU2MmVhOTc1YjdjYmM4ZWMxZmNmZGUxOGY3YjIwNjY4ZDFjZTYwNzYyNDE0NGQ2&frz-width=542" alt="rose">
   <p>Bois de rose et son vase offert</p>
   <strong>44,95€</strong>
- <p><a href="Panier.php" class="btn">Ajouter au panier</a></p>
+ <p><a href="Panier.php?id=<?= $produit['id'] ?>" class="btn">Ajouter au panier</a></p>
 </div>
 <div class="product">
 <img src="https://medias.interflora.fr/fstrz/r/s/c/medias.interflora.fr/medias/1SEN-THUMBMAY-PRIMARY-0-1.jpg?context=bWFzdGVyfGltYWdlc3wxNDY4MTR8aW1hZ2UvanBlZ3xpbWFnZXMvaGEyL2gzMy85Njk0NzEyNzkxMDcwLmpwZ3w3MzEyYmRlODUyMmYyYTVkOTQyMDIzY2E2M2QzZWY2NGM4MGMwYmEzYWM3NTlmZTRkYmMwNDk4ZjU0OTNlYTQ2&frz-width=320" alt="">
 <p>Joyeux anniversaire.</p>
 <strong>56,95€</strong>
- <p><a href="Panier.php" class="btn">Ajouter au panier</a></p>
+<p><a href="Panier.php?id=<?= $produit['id'] ?>" class="btn">Ajouter au panier</a></p>
 </div>
 <div class="product">
 <img src="https://medias.interflora.fr/fstrz/r/s/c/medias.interflora.fr/medias/1PEPL-THUMBMAY-PRIMARY-0-1.jpg?context=bWFzdGVyfGltYWdlc3wxMDIxNjV8aW1hZ2UvanBlZ3xpbWFnZXMvaGUyL2hiMS85NjE1Njk1MTgzOTAyLmpwZ3xhMGNhNWY5MGNiYTY3Y2NkOWE5ZGRmODc5MTcyZGRmMjU3Y2Y1YjU4NmViZTRjMmYzMjlhNWY2ZjdmOGU4MjM2&frz-width=320" alt="">
 <p>petit plaisiir</p>
 <strong>49,95€</strong>
- <p><a href="Panier.php" class="btn">Ajouter au panier</a></p>
+<p><a href="Panier.php?id=<?= $produit['id'] ?>" class="btn">Ajouter au panier</a></p>
 </div>
 <div class="product"> 
   <img src="https://medias.interflora.fr/fstrz/r/s/c/medias.interflora.fr/medias/2PER-THUMBMAY-PRIMARY-0-1.jpg?context=bWFzdGVyfGltYWdlc3wxNjY1MDF8aW1hZ2UvanBlZ3xpbWFnZXMvaDMyL2g4MC85NjEyMDM1MzU4NzUwLmpwZ3xjMjc4YTY3NmJiOTk2Y2U1ZmZmOTVlZmM4OWY1ZGZmYmIzNDQ5YTE4MDI4ZTkzZDFjMzI5N2NiYTljOTFiMGFl&frz-width=320" alt="">
   <p>Perlita</p>
   <strong>59,95€</strong>
-  <p><a href="Panier.php" class="btn">Ajouter au panier</a></p>
+  <p><a href="Panier.php?id=<?= $produit['id'] ?>" class="btn">Ajouter au panier</a></p>
 </div>
   <div class="product"> 
     <img src="https://medias.interflora.fr/fstrz/r/s/c/medias.interflora.fr/medias/1MGAM-PRIMARY-0-1.jpg?context=bWFzdGVyfGltYWdlc3wxMDcyNzB8aW1hZ2UvanBlZ3xpbWFnZXMvaDE5L2g0YS85NjM2NjY2MTQ2ODQ2LmpwZ3xjNzZmZmRmYWU2NjUwZWYwNGQxMzI3NDA0OTA4ZGYwYjI4Mjk3Y2YwZWY1ZGY4MGU5NzNjZTZiODQ3NWU0ZmVl&frz-width=440&frz-height=440&frz-gravity=center&frz-enlarge=true" alt="">
     <p>Mon grand amour</p>
     <strong>39,95€</strong>
-    <p><a href="Panier.php" class="btn">Ajouter au panier</a></p>
+    <p><a href="Panier.php?id=<?= $produit['id'] ?>" class="btn">Ajouter au panier</a></p>
     </div>
     <div class="product"> 
       <img src="https://medias.interflora.fr/fstrz/r/s/c/medias.interflora.fr/medias/2LY-THUMBMAY-PRIMARY-0-1.jpg?context=bWFzdGVyfGltYWdlc3wxNzcyOTV8aW1hZ2UvanBlZ3xpbWFnZXMvaDVhL2hmOC85NzIzODk5NDc4MDQ2LmpwZ3wyOGJlZDhjNTgwNjIzNzY4MzE1Nzc2ZDc4NGQxMDI5Zjg3MGQ5MDAwZDZjMWMxMmI0NDhmYzFmMmY2NDhmNTZm&frz-width=320" alt="">
       <p>Nos magnifique lys</p>
       <strong>42,95€</strong>
-      <p><a href="Panier.php" class="btn">Ajouter au panier</a></p>
+      <p><a href="Panier.php?id=<?= $produit['id'] ?>" class="btn">Ajouter au panier</a></p>
       </div>
 </div>
 </section>
 
 <section class="why-us">
-  <h1>Pourquoi nous choisir</h1>
+  <h1 class='text-center'>Pourquoi nous choisir</h1>
   <ul>
     <img src="https://thumbs.dreamstime.com/z/symbole-vert-de-vecteur-d-ic-ne-coutil-trait-rep-re-isolement-sur-le-fond-blanc-v-rifi-e-ou-signe-coche-checkbox-bien-choisi-147508521.jpg" alt="icône" width="20" style="vertical-align: middle;">
     <p>Fleurs fraîche du jour</p>

@@ -1,5 +1,5 @@
 <?php
-$dsn = "mysql:host=localhost;dbname=gestionstock;charset=utf8";
+$dsn = "mysql:host=localhost;dbname=fleur'shop';charset=utf8";
 $user = "root";
 $pass = "";
 

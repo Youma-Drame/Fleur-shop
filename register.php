@@ -13,41 +13,18 @@
 <?php
 include 'header.php';
 ?>
-<div class="container">
-    <h1 class="mt-5">Register</h1>
-    <form action="register.php" method="post">
-        <div class="mb-3">
-            <label for="name" class="form-label">Name</label>
-            <input type="text" class="form-control" id="name" name="name" required>
-        </div>
-        <div class="mb-3">
-            <label for="email" class="form-label">Email address</label>
-            <input type="email" class="form-control" id="email" name="email" required>
-        </div>
-        <div class="mb-3">
-            <label for="password" class="form-label">Password</label>
-            <input type="password" class="form-control" id="password" name="password" required>
-        </div>
-        <button type="submit" class="btn btn-primary">Register</button>
-    </form>
-</div>
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.6/dist/js/bootstrap.bundle.min.js" integrity="sha384-j1CDi7MgGQ12Z7Qab0qlWQ/Qqz24Gc6BM0thvEMVjHnfYGF0rmFCozFSxQBxwHKO" crossorigin="anonymous"></script>
-</div>
-<?php
-if ($_SERVER["REQUEST_METHOD"] == "POST") {
-    $name = $_POST['name'];
-    $email = $_POST['email'];
-    $password = $_POST['password'];
 
-    // Here you would typically save the user data to a database
-    // For demonstration, we'll just echo the data
-    echo "<div class='alert alert-success mt-3'>Registration successful for $name with email $email.</div>";
-    
-}
-?>
+
 <?php
 
-include('db.php');
+include('config.php');
+Session_start();
+$pdo = new PDO("mysql:host=localhost;dbname=fleurshop", "root", ""); // Adjust the connection parameters as needed
+ 
+$stmt =$pdo->prepare("insert into users (nom, prénom, email, mot de passe) values (?, ?, ?, ?)");
+ 
+echo "Utilisateur ajouté avec succès !";
+
 
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $nom = $_POST['nom'];
@@ -55,20 +32,23 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $password = $_POST['password'];
     $email = $_POST['email'];
   
-    $sexe = $_POST['role'];
+   
+    $req = "INSERT INTO users (nom, prenom, email, password,) VALUES ('$nom', '$prenom', '$email', '$password', )";
+     
+    $stmt = $pdo->prepare($req);
 
 
-    if (empty($nom) || empty($prenom) || empty($password) || empty($email) || empty($phone) || empty($role)) {
+    if (empty($nom) || empty($prenom) || empty($password) || empty($email) || empty($role)) {
         echo "<div class='alert alert-danger'>All fields are required.</div>";
         exit;
     }
 
-    if( strlen($password) < 12) {
+    if( strlen($password) < 8) {
         echo "<div class='alert alert-danger'>Password must be at least 12 characters long.</div>";
         exit;
     }
 
-    if ($password !== $confirm_password) {
+    if ($password != $password) {
         echo "<div class='alert alert-danger'>Passwords do not match.</div>";
         exit;
     }
@@ -76,7 +56,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
    
 
     // Check if the email already exists
-    $stmt = $pdo->prepare("SELECT COUNT(*) FROM users WHERE mail = ?");
+    $stmt = $pdo->prepare("SELECT COUNT(*) FROM users WHERE email = ?");
     $stmt->execute([$email]);
     if ($stmt->fetchColumn() > 0) {
         echo "<div class='alert alert-danger'>Email already exists.</div>";
@@ -86,7 +66,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
         // Prepare and execute the SQL statement
         $stmt = $pdo->prepare("INSERT INTO users (nom, prenom, mail, phone, mdp, sexe, access) VALUES (?, ?, ?, ?, ?, ?, ?)");
-        if ($stmt->execute([$nom,$prenom, $email,  $phone, $hashed_password, $sexe, 0])) {
+        if ($stmt->execute([$nom,$prenom, $email,  $hashed_password, $role,])) {
             header("Location: index.php");
             exit;
         } else {
@@ -110,13 +90,11 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
 </head>
 
-<?php
-include('navbar.php');
-?>
+
 
 <body class="bg-secondary">
     <form  class="mt-3 p-3 rounded bg-white container" action="" method="post">
-        <h1 class="text-center">Register   </h1>
+        <h1 class="text-center">Inscription  </h1>
 
         <input class="form-control" type="text" name="nom" placeholder="Username" required>
         <input class="mt-3 form-control" type="text" name="prenom" placeholder="First Name" required>
@@ -138,18 +116,12 @@ include('navbar.php');
             </label>
           </div>    
 
-        <input class="mt-3 btn btn-outline-primary" type="submit" value="Register">
+        <input class="mt-3 btn btn-outline-primary" type="submit" value="S'inscrire">
     </form>
 </body>
 </html>
 </div>
-</div>
-</div>
-</div>
-</div>
-</div>
-</div>
-</div>
+ 
     
 </body>
 </html>

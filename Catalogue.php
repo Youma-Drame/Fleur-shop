@@ -27,13 +27,14 @@
       <div class="collapse navbar-collapse" id="navbarSupportedContent">
         
         <form class="d-flex" role="search">
-          <a class="btn btn-outline-success" href="index.php">Login <i class="fa-solid fa-user"></i></a>
+          <a class="btn ms-3 btn-outline-success" href="Login.php">Connecter <i class="fa-solid fa-user"></i></a>
 
-          <a href="register.php" class="btn ms-3 btn-outline-success" >Register</a>
+          <a href="register.php" class="btn ms-3 btn-outline-success" >S'inscrire</a>
         </form>
       </div>
     </div>
   </nav>
+  
  <header>
     <h1>Tous nos bouquets</h1>
     <p>Découvrez notre sélection de fleurs et de bouquets, parfaits pour chaque occasions.</p>
@@ -43,7 +44,7 @@
          <a href="Amour.php" class="btn ">Amour</a>
          <a href="Deuil.php" class="btn ">Deuil</a>
             <a href="Naissance.php" class="btn ">Naissance</a>
-            <a href="Remerciement.php" class="btn ">Remerciement</a>
+           
             <a href="Plaisir.php" class="btn ">Plaisir</a>
             <p></p>
     </nav>
@@ -251,5 +252,7 @@
     <div class="container">
         <p>&copy; 2025 Tous droits réservés.</p>
         <p>Contact:
+          
             <a href="mailto:
+           
 
